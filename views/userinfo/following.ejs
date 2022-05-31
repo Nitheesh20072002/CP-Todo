@@ -3,7 +3,8 @@
 <div class="container" >
     <div class="row">
         <div class="col-8" >
-            <h3>Friends List:</h3>
+            <h3 class="scrollhead">Friends List:</h3>
+            <button type="button" class="btn btn-sm btn-primary" id="circle"><%=user.following.length%> </button>
             <div class="followscroll">
                 <%if(user.following.length){%> 
                     <%user.following.forEach((friend,i)=>{%> 

@@ -7,6 +7,8 @@ const userInfo = require('../controllers/userInfo');
 const { route } = require('./users');
 const {restoreSingle, restoreAll}= require('../utils/binhelper.js');
 const { isLoggedIn } = require('../middleware.js');
+const{todosizecheck} = require('../utils/sizemaintainer.js');
+
 
 
 router.route('/todo')
@@ -25,12 +27,14 @@ router.post('/restore',isLoggedIn,async (req,res)=>{
     const{probid}= req.body;
     const{username}= req.params;
     await restoreSingle(probid,username);
+    await todosizecheck(username);
     res.redirect(`/${username}/recent`);
 })
 router.post('/restoreall',isLoggedIn,async (req,res)=>{
     const{probid}= req.body;
     const{username}= req.params;
     await restoreAll(username);
+    await todosizecheck(username);
     res.redirect(`/${username}/recent`);
 })
 router.route('/following')

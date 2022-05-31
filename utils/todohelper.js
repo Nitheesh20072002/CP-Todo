@@ -58,6 +58,12 @@ const updateSingle= async (handle)=>{
     });
 }
 
+const deleteSingleTodo = async (username,probid)=>{
+    const user= await User.findOne({username:username});
+    await User.findByIdAndUpdate(user._id,{$pull:{todo: probid}});
+    await user.recentdeleted.push(probid);
+    await user.save();
+};
 // const removefromtodo = async (handle,probId) =>{
 //     // db.survey.updateMany({ }, $pull: { results: { $elemMatch: { score: 8 , item: "B" } } } })
 //     await User.updateMany({'handle':handle}, {$pull:{todo:{'problemId':probId}}});
@@ -70,4 +76,4 @@ const updateSingle= async (handle)=>{
 // updateNew();
 // updateSingle('me');
 // export {updateNew,removefromtodo};
-module.exports ={updateNew,updateSingle};
+module.exports ={updateNew,updateSingle,deleteSingleTodo};

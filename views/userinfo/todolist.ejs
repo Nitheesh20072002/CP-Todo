@@ -2,7 +2,8 @@
 <div class="container offset-1">
     <div class="row justify-content-between">
         <div class="col-4">
-            <h2>Todo-List</h2>
+            <h3 class="scrollhead">Todo-List  </h3>
+            <button type="button" class="btn btn-sm btn-primary" id="circle"><%=user.todo.length%> </button>
         </div>
         <div class="col-4">
             <form action="/<%=user.username%>/updatetodo" method="post">

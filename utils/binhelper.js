@@ -2,6 +2,8 @@ const User = require('../models/user.js');
 const Problem = require('../models/problem.js');
 const Manager = require('../models/problemmanager.js');
 
+
+
 const deleteSingle = async (probid,username)=>{
     const inmanage=await Manager.findOne({problemId:probid});
     // console.log(probid);

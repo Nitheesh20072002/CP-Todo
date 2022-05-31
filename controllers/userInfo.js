@@ -3,24 +3,25 @@ const User = require('../models/user.js');
 const Problem = require('../models/problem.js');
 const Manager = require('../models/problemmanager.js');
 const {getData} = require('../scrapping/cf.js');
-const {updateSingle} = require('../utils/todohelper.js');
+const {updateSingle,deleteSingleTodo} = require('../utils/todohelper.js');
 const {checkUser} = require('../utils/usercheck.js');
 const catchAsync = require('../utils/catchAsync.js');
 const {manageHelper} = require('../utils/managehelper.js');
 const{deleteAll,deleteSingle} = require('../utils/binhelper.js');
+const { todosizecheck ,bincheck} = require('../utils/sizemaintainer.js');
 
 
 module.exports.showTodo = async (req,res)=>{
     const {username}=req.params;
+    await updateSingle(username);
+    await todosizecheck(username);
     const user= (await User.findOne({username:username}).populate({path:'todo'}));
     res.render('userinfo/todolist',{user});
 };
 module.exports.deleteTodo = async (req,res)=>{
     const {username,probid}=req.params;
-    const user= await User.findOne({username:username});
-    await User.findByIdAndUpdate(user._id,{$pull:{todo: probid}});
-    await user.recentdeleted.push(probid);
-    await user.save();
+    await deleteSingleTodo(username,probid);
+    await bincheck(username);
     res.redirect(`/${username}/todo`);
 };
 
@@ -37,6 +38,7 @@ module.exports.deleteBin = async (req,res)=>{
     await deleteAll(username);
     res.redirect(`/${username}/recent`);
 };
+
 module.exports.deleteOne = async (req,res)=>{
     const {username}=req.params;
     const{probid}= req.body;
@@ -44,9 +46,11 @@ module.exports.deleteOne = async (req,res)=>{
     res.redirect(`/${username}/recent`);
 };
 
+
 module.exports.updateTodo = async (req,res)=>{
     const {username}=req.params;
     await updateSingle(username);
+    await todosizecheck(username);
     res.redirect(`/${username}/todo`);
 };
 
@@ -90,6 +94,7 @@ module.exports.addFollow = async (req,res)=>{
             req.flash('error','Handle cannot be empty');
         }
     }
+    await todosizecheck(username);
     res.redirect(`/${username}/following`);
 }
 module.exports.unFollow = async (req,res)=>{
