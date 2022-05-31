@@ -13,8 +13,6 @@ const { todosizecheck ,bincheck} = require('../utils/sizemaintainer.js');
 
 module.exports.showTodo = async (req,res)=>{
     const {username}=req.params;
-    await updateSingle(username);
-    await todosizecheck(username);
     const user= (await User.findOne({username:username}).populate({path:'todo'}));
     res.render('userinfo/todolist',{user});
 };
