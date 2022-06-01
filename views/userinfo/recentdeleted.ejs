@@ -24,7 +24,7 @@
                         <% for(let x in prob) {%>
                                 <div>
                                     <% if(x === 'problemUrl') {%> 
-                                        <%=x%>: <a href='https://codeforces.com<%=prob[`${x}`]%>'><%=prob[`${x}`]%></a>
+                                        <%=x%>: <a href='https://codeforces.com<%=prob[`${x}`]%>' target="_blank" rel="noopener noreferrer"><%=prob[`${x}`]%></a>
                                     <% }else if(x==='problemName'){%> 
                                         <%=x %>: <%= prob[`${x}`] %>  
                                     <%}%> 

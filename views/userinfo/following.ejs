@@ -13,7 +13,7 @@
                                 <h5 class="insider"><%=friend.name%></h5>
                             </div>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a class="btn btn-info btn-sm insider rounded me-2" href="https://codeforces.com/profile/<%=friend.name%>" role="button">Profile</a>
+                                <a class="btn btn-info btn-sm insider rounded me-2" href="https://codeforces.com/profile/<%=friend.name%>" role="button" target="_blank" rel="noopener noreferrer">Profile</a>
                                 <form action="/<%=user.username%>/unfollow" method="post" class="insider">
                                     <input type="hidden" name="userHandle" value="<%=user.username%>"/>
                                     <input type="hidden" name="friendHandle" value="<%=friend.name%>"/>
