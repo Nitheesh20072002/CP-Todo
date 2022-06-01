@@ -20,11 +20,11 @@ async function getData(handle,rownumber=2) {
                                 // console.log("************************");
                                 if(row.children['7']){
                                     let cur=row.children[`${7}`];
-                                    // "/n"column""/n"column"\n"column......."\n"column format
+                            //         // "/n"column""/n"column"\n"column......."\n"column format
                                     if(cur.name === "td"){
                                         // console.log('#################################################');
-                                        // console.log(row.children['5'].children['0'].next.children['0'].parent.attribs.href.substring(9));
-                                        userData.handle = row.children['5'].children['0'].next.children['0'].parent.attribs.href.substring(9);
+                                        // console.log(row.children['5'].children['0'].next.children['0'].parent.attribs);
+                                        userData.handle = handle.trim();
                                         // console.log(cur.children['1'].attribs['href']);
                                         userData.problemId= cur.children['1'].attribs['href'];
                                         // console.log(cur.children['1'].children['0'].data.trim());
@@ -48,8 +48,8 @@ async function getData(handle,rownumber=2) {
 }
 
 // const dat=async (handle)=>{
-//     await getData(handle);
+//     console.log(await getData(handle));
 // }
-// // dat('NitheeshKumarChapala');
+// dat('tourist');
 // dat('dsf');
 module.exports= {getData};

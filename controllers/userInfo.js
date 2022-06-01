@@ -61,12 +61,14 @@ module.exports.renderFollowing = async (req,res)=>{
 module.exports.addFollow = async (req,res)=>{
     let {username}=req.params;
     let {friendHandle}= req.body;
+    // console.log(username,friendHandle);
     username=username.trim();
     friendHandle=friendHandle.trim();
     const check=await checkUser(friendHandle);
     // console.log(check);
     if(check){
         const data=await getData(friendHandle);
+        // console.log(data);
         if(Object.keys(data).length){
             const user= await User.findOne({username:username});
             let checkuserfollow=true;

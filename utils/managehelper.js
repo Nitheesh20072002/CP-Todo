@@ -10,18 +10,25 @@ const manageHelper = async (data,username)=>{
     // console.log(found);
     if(found){
         // console.log('Problem found!');
-        let intodo=false;
+        let present=false;
         user.todo.forEach((prob,i)=>{
             // console.log(prob);
             // console.log(found._id);
             if(found._id.equals(prob)){
-                intodo=true;
+                present=true;
+            }
+        })
+        user.recentdeleted.forEach((prob,i)=>{
+            // console.log(prob);
+            // console.log(found._id);
+            if(found._id.equals(prob)){
+                present=true;
             }
         })
         // console.log(found);
-        // const intodo=await User.findOne({username:username,todo:{$in:[inmanage.problemId]}});
-        // console.log(intodo);
-        if(!intodo){
+        // const present=await User.findOne({username:username,todo:{$in:[inmanage.problemId]}});
+        // console.log(present);
+        if(!present){
             // console.log("dfsfasd");
             const inmanage=await Manager.findOne({problemId:found._id});
             const curfr=inmanage.frequency;
