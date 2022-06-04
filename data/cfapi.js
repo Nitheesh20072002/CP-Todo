@@ -21,7 +21,7 @@ const getData= async(handle,start=1,count=1)=>{
                     userData.problemName = `${problem.index} - `+problem.name.trim();
                 }
             }
-        }, (error) => {});
+        }, (error) => {console.log(error)});
     return userData;
     // consol.log(outp);
 }
