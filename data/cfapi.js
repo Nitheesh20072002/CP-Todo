@@ -19,6 +19,7 @@ const getData= async(handle,start=1,count=1)=>{
                 // // console.log(cur.children['1'].children['0'].data.trim());
                 userData.problemName = `${problem.index} - `+problem.name.trim();
                 // // console.log(row.children['11'].children['0'].next.attribs.submissionverdict);
+                if(!response.data.result['0'].verdict) response.data.result['0'].verdict="Notavailable"
                 userData.problemStatus = response.data.result['0'].verdict.trim();
             }
         }, (error) => {});
