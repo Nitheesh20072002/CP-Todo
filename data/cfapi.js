@@ -13,14 +13,13 @@ const getData= async(handle,start=1,count=1)=>{
                 const contestId = response.data.result['0'].contestId;
                 const problem = response.data.result['0'].problem;
                 const problemUrl= `/contest/${contestId}/problem/${problem.index}`;
-                userData.handle = handle.trim();
-                // // console.log(cur.children['1'].attribs['href']);
-                userData.problemId= problemUrl;
-                // // console.log(cur.children['1'].children['0'].data.trim());
-                userData.problemName = `${problem.index} - `+problem.name.trim();
-                // // console.log(row.children['11'].children['0'].next.attribs.submissionverdict);
-                if(!response.data.result['0'].verdict) response.data.result['0'].verdict="Notavailable"
-                userData.problemStatus = response.data.result['0'].verdict.trim();
+                // console.log(response.data.result['0'].verdict);
+                if(response.data.result['0'].verdict){
+                    userData.handle = handle.trim();
+                    userData.problemStatus = response.data.result['0'].verdict.trim();
+                    userData.problemId= problemUrl;
+                    userData.problemName = `${problem.index} - `+problem.name.trim();
+                }
             }
         }, (error) => {});
     return userData;

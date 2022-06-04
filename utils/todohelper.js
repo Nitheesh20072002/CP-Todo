@@ -57,7 +57,7 @@ const updateSingle= async (handle)=>{
             // const newprob=new Problem({problemUrl:newarr[i].problemId,problemName:newarr[i].problemName,problemStatus:newarr[i].problemStatus});
             // await user.todo.push(newprob);
             // await newprob.save();
-            // await user.save();
+            await user.save();
         }
     });
 
