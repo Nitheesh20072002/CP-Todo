@@ -1,8 +1,8 @@
-// import User from '../models/user.js';
 const User = require('../models/user.js');
 const Problem = require('../models/problem.js');
 const Manager = require('../models/problemmanager.js');
-const {getData} = require('../scrapping/cf.js');
+// const {getData} = require('../scrapping/cf.js');
+const {getData} = require('../data/cfapi.js');
 const {updateSingle,deleteSingleTodo} = require('../utils/todohelper.js');
 const {checkUser} = require('../utils/usercheck.js');
 const catchAsync = require('../utils/catchAsync.js');
@@ -26,13 +26,11 @@ module.exports.deleteTodo = async (req,res)=>{
 module.exports.recentDeleted = async (req,res)=>{
     const {username}=req.params;
     const user= (await User.findOne({username:username}).populate({path:'recentdeleted'}));
-    // console.log(user);
     res.render('userinfo/recentdeleted',{user});
 };
 
 module.exports.deleteBin = async (req,res)=>{
     const {username}=req.params;
-    // console.log(username);
     await deleteAll(username);
     res.redirect(`/${username}/recent`);
 };
@@ -61,14 +59,11 @@ module.exports.renderFollowing = async (req,res)=>{
 module.exports.addFollow = async (req,res)=>{
     let {username}=req.params;
     let {friendHandle}= req.body;
-    // console.log(username,friendHandle);
     username=username.trim();
     friendHandle=friendHandle.trim();
     const check=await checkUser(friendHandle);
-    // console.log(check);
     if(check){
         const data=await getData(friendHandle);
-        // console.log(data);
         if(Object.keys(data).length){
             const user= await User.findOne({username:username});
             let checkuserfollow=true;
@@ -103,6 +98,5 @@ module.exports.unFollow = async (req,res)=>{
     friendHandle=friendHandle.trim();
     username=username.trim();
     await User.updateOne({username:username},{$pull:{following: {name:friendHandle}}});
-    // const user=await User.find({username:username});
     res.redirect(`/${username}/following`);
 }
