@@ -36,9 +36,6 @@ const updateNew= async ()=>{
 
 const updateSingle= async (handle)=>{
     const user=(await User.findOne({username:handle}));
-    // console.log(user);
-    // console.log(Object.keys(user._doc));
-    // user =  user._doc;
     if(Object.keys(user._doc).includes('following')){
         // console.log(handle);
         user.following.forEach(async (ele,i) =>{
