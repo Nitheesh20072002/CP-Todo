@@ -16,7 +16,7 @@
                     <div class="card-body mb-2 rounded todo">
                         <form action="/<%=user.username%>/todo/<%=prob._id%>" method="post">
                             <div class="todocheck">
-                                <input class="form-check-input"id='<%=i%>' name="inputcheck" onChange="this.form.submit()" type="checkbox" value='<%=prob['problemId']%>'>
+                                <input class="form-check-input" style="margin-top:-0.5em" id='<%=i%>' name="inputcheck" onChange="this.form.submit()" type="checkbox" value='<%=prob['problemId']%>'>
                                 <input type="hidden" name="handle" value="<%=user.username%>"/>
                             </div>
                             <label for="#">
